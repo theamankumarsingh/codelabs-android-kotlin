@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">About Me</string>
+    <string name="Name">Welcome</string>
+    <string name="ImageDescription">Star</string>
+    <string name="enter_message">Enter your name</string>
+    <string name="Button_text">Done</string>
+</resources>
