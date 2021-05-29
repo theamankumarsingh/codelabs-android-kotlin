@@ -1,9 +1,11 @@
 package com.aman.diceroller
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.*
-import java.lang.NumberFormatException
+import androidx.appcompat.app.AppCompatActivity
+
 
 var  t : Toast? = null
 
@@ -12,31 +14,58 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val rollButton: Button = findViewById<Button>(R.id.roll_button)
-        val countButton: Button = findViewById<Button>(R.id.count_button)
+        val rollButton: Button = findViewById(R.id.roll_button)
+        val countButton: Button = findViewById(R.id.turn_button)
         rollButton.setOnClickListener { rollDice() }
-        countButton.setOnClickListener{ countUp() }
+        countButton.setOnClickListener{ turn() }
     }
     private fun rollDice()
     {
-        t?.cancel()
         val random : Int = (1..6).random()
-        val greeting_message : TextView = findViewById<TextView>(R.id.greeting_text)
-        greeting_message.text  = random.toString()
-        t = Toast.makeText(this, "Dice Rolled!",
-            Toast.LENGTH_SHORT)
-        t?.show()
+        val greetingmessage : TextView = findViewById(R.id.dice_number)
+        greetingmessage.text  = random.toString()
+        changeDice(random)
+        toast("Dice Rolled!")
     }
-    private fun countUp()
+    private fun turn()
     {
-        val greeting_message : TextView = findViewById<TextView>(R.id.greeting_text)
+        val greetingmessage : TextView = findViewById(R.id.dice_number)
+        var num = Integer.parseInt(greetingmessage.text.toString())
         try{
-            val num = Integer.parseInt(greeting_message.text.toString());
-            greeting_message.text = (num+1).toString()
+            if(num==6)
+                num=0
+            num++
         }
         catch(e:NumberFormatException)
         {
-            greeting_message.text = "1";
+            num=1
         }
+        greetingmessage.text = (num).toString()
+        changeDice(num)
+        toast("Dice Turned!")
+    }
+    private fun changeDice(n:Int)
+    {
+        val image : ImageView = findViewById(R.id.dice)
+        var path = 1
+        when(n)
+        {
+            1 -> path = R.drawable.dice_1
+            2 -> path = R.drawable.dice_2
+            3 -> path = R.drawable.dice_3
+            4 -> path = R.drawable.dice_4
+            5 -> path = R.drawable.dice_5
+            6 -> path = R.drawable.dice_6
+        }
+        image.setImageResource(path)
+    }
+    @SuppressLint("ShowToast")
+    private fun toast(txt:String)
+    {
+        t?.cancel()
+        t = Toast.makeText(this, txt,
+            Toast.LENGTH_SHORT)
+        t?.setGravity(Gravity.BOTTOM,0,0)
+        t?.show()
     }
 }

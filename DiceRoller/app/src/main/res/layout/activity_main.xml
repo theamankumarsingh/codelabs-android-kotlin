@@ -9,12 +9,18 @@
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     >
-
-    <TextView
-        android:id="@+id/greeting_text"
+    <ImageView
+        android:id="@+id/dice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/greeting_text"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/dice_1"
+        ></ImageView>
+    <TextView
+        android:id="@+id/dice_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dice_number"
         android:layout_gravity="center_horizontal"
         android:textSize="60sp">
     </TextView>
@@ -25,10 +31,10 @@
         android:text="@string/roll_text"
         android:layout_gravity="center_horizontal"/>
     <Button
-        android:id="@+id/count_button"
+        android:id="@+id/turn_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/count_text"
+        android:text="@string/turn_text"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 
